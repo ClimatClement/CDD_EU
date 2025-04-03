@@ -1,12 +1,18 @@
 import cdsapi
 import os
 import sys
-from config import OUTPUT_DATA_PATH
+from config import BDD_PATH
 
 year=sys.argv[1]
-writedir=OUTPUT_DATA_PATH
-#os.chdir(writedir)
+writedir=os.path.join(BDD_PATH,'CERRA')
+os.chdir(writedir)
 target=f'CERRA_{year}_tp.nc'
+
+if os.path.exists(os.path.join(writedir,target)):
+    print(f'Ignoring year {year}. File already exists')
+    exit()
+
+print(f'Requesting year {year}')
 
 dataset = "reanalysis-cerra-single-levels"
 request = {
@@ -38,10 +44,7 @@ request = {
     "leadtime_hour": ["24"],    #In CERRA, tp is cumulative by setting time 00:00 and leadtime_hour 24 we get the total amount of precipitation of the previous 24 hours. In consequence, the time stamp 2-1-1984 refers to the precipitations of the 1-1-1984.
     "data_format": "netcdf"
 }
-print(year,' : ',target)
-print()
-print(request)
-print()
-#client = cdsapi.Client()
-#client.retrieve(dataset, request, target).download()
-#os.chdir('/home/climatclement/Documents/CODE/CDD_EU')
+
+client = cdsapi.Client()
+client.retrieve(dataset, request, target)#.download()
+

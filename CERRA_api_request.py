@@ -3,8 +3,14 @@ import os
 import sys
 from config import BDD_PATH
 
+#This script assembles and sends the CDS API request.
+#It also creates the corresponding directory to save the data and ignores requests if the result file already exists.
+
 year=sys.argv[1]
+
 writedir=os.path.join(BDD_PATH,'CERRA')
+os.makedirs(writedir,exist_ok=True)
+
 os.chdir(writedir)
 target=f'CERRA_{year}_tp.nc'
 
@@ -46,5 +52,4 @@ request = {
 }
 
 client = cdsapi.Client()
-client.retrieve(dataset, request, target)#.download()
-
+client.retrieve(dataset, request, target)

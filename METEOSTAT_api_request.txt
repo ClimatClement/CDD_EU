@@ -1,0 +1,4 @@
+--request GET \
+--url "https://meteostat.p.rapidapi.com/stations/daily?station=ID&start=YEAR0-01-01&end=YEAR1-12-31&model=false" \
+--header "x-rapidapi-host: meteostat.p.rapidapi.com" \
+--header "x-rapidapi-key: 0d7a7218f9msh71fd8f946a02c2ep1c853ejsn792cfc3c547f"

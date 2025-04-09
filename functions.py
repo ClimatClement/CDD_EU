@@ -21,7 +21,7 @@ def Groupby_consecutive_ones(arr):
         idx += len(group_list)
     return(result)
 
-def Plot_EUR_map(arr,title:str='',cbar_label:str='',vmin:float=0,vmax:float=180,pal:str='Reds',savename:str=''):
+def Plot_EUR_map(arr,title:str='',cbar_label:str='',vmin:float=0,vmax:float=180,pal:str='Reds',pinpoints:dict={},savename:str=''):
     '''
     INPUTS
     arr         DataArray   2-dimensionnal
@@ -77,19 +77,31 @@ def Plot_EUR_map(arr,title:str='',cbar_label:str='',vmin:float=0,vmax:float=180,
     gl.xlocator = mticker.FixedLocator(np.arange(-180, 181, 5))
     gl.ylocator = mticker.FixedLocator(np.arange(-90, 91, 5))
 
+    if len([p for p in pinpoints])>0:
+        p_lats = np.array([pinpoints[location]['lat'] for location in pinpoints])
+        p_lons = np.array([pinpoints[location]['lon'] for location in pinpoints])
+        p_names = [location for location in pinpoints]
+        x, y, _ = ccrs.PlateCarree().transform_points(ccrs.Geodetic(), p_lons, p_lats).T
+        ax.scatter(x, y, 100, color="k", marker="v", edgecolor="w", zorder=3)
+        for i in range(len(p_names)):
+            plt.text(x[i], y[i]+0.5, p_names[i], va="bottom", family="monospace", weight="bold")
+
     if savename!='':
         plt.savefig(savename)
         plt.close()
     else:
         plt.show()
 
-def Plot_local_time_series(x,values,title,color:str='#907700'):
+def Plot_local_time_series(x,values,med_val,med_val_label,title,color:str='#907700'):
     '''
     CONSTRUCTION
     '''
+    import numpy as np
     import matplotlib.pyplot as plt
 
     plt.bar(x,values,color=color)
+    plt.plot(x,np.repeat(med_val,len(x)),linestyle=':',color='r',label=med_val_label)
+    plt.legend()
     plt.title(title)
     plt.grid()
     plt.show()

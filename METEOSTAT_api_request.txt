@@ -1,3 +1,4 @@
+#ABANDONNED BRANCH
 --request GET \
 --url "https://meteostat.p.rapidapi.com/stations/daily?station=ID&start=YEAR0-01-01&end=YEAR1-12-31&model=false" \
 --header "x-rapidapi-host: meteostat.p.rapidapi.com" \

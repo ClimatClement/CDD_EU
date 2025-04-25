@@ -105,3 +105,13 @@ def Plot_local_time_series(x,values,med_val,med_val_label,title,color:str='#9077
     plt.title(title)
     plt.grid()
     plt.show()
+
+def Write_to_log(log_file,log_text,overwrite=False):
+    import os
+    write_mode = 'w' if overwrite else 'a'
+    if os.path.exists(log_file):
+        with open(log_file, write_mode) as f:
+                f.write(f"{log_text}\n")
+    else:
+        with open(log_file, 'w') as f:
+                f.write(f"{log_text}\n")

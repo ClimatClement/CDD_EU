@@ -5,6 +5,8 @@ BDD_PATH = Path('/media/cl-ment-devenet/Partage/bdd')
 
 OUTPUT_DATA_PATH = Path('/media/cl-ment-devenet/Partage/bdd/Produits')
 
+TRASH_PATH = Path('/media/cl-ment-devenet/Partage/bdd/trash')
+
 #PARAMETERS
 CERRA_approx_resolution_degrees = 0.05
 

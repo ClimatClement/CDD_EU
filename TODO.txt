@@ -1,0 +1,13 @@
+- CORDEX :
+    *extraire domaine CERRA
+    *extraire points IASI, KAUNAS, MONT-DE-MARSAN
+    *comparer histo avec CERRA
+    *tracer projections
+    *identifier réponse forcée versus variabilité naturelle
+    *regrouper les modèles par comportement (storylines)
+    *donner information deltaCDD horizon 2050, 2070
+- Général :
+    *créer une routine pour extraire les NUTS
+        *récupération des points de grilles intersectant un NUTS
+        *pondération de la valeur par la surface intersecté
+        *moyenne pondérée
